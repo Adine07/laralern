@@ -51,11 +51,13 @@
 
 	$rumah = new Rumah("2x1", "taman bunga");
 
-	echo "Saya memesan rumah dengan type: " . $rumah->ShowType() . " dan memiliki " . $rumah->ShowLantai() . " lantai, dengan halaman " . $rumah->ShowHalaman() . "<br/>";
+	echo "Saya memesan rumah dengan type: " . $rumah->ShowType() . " dan memiliki " . $rumah->ShowLantai() . " lantai, dengan halaman " . $rumah->ShowHalaman();
+
+	echo "<br/><br/>";
 
 	$rumah->SetLantai("tujuh");
 
-	echo "Saya memesan rumah dengan type: " . $rumah->ShowType() . " dan memiliki " . $rumah->ShowLantai() . " lantai, dengan halaman " . $rumah->ShowHalaman() ;
+	echo "Saya memesan rumah dengan type: " . $rumah->ShowType() . " dan memiliki " . $rumah->ShowLantai() . " lantai, dengan halaman " . $rumah->ShowHalaman();
 
 
 ?>
