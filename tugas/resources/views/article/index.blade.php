@@ -12,7 +12,7 @@
 
 	<h1>List Article</h1>
 
-	<table border="1" style="width: 100%;">
+	<table border="1" style="width: 80%; margin:auto">
 		<thead>
 			<tr>
 				<th>Title</th>

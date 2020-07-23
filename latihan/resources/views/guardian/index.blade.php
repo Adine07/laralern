@@ -12,6 +12,8 @@
 
 	<h1>Data Wali</h1>
 
+	<a href="/guardians/create">Tambah Data</a>
+
 	<table border="1" style="width: 100%;">
 		<thead>
 			<tr>
@@ -22,6 +24,7 @@
 				<th>Tanggal Lahir</th>
 				<th>Alamat</th>
 				<th>Kandung</th>
+				<th>Action</th>
 			</tr>
 		</thead>
 
@@ -35,6 +38,7 @@
 				<td>{{ $guardian->birth_date }}</td>
 				<td>{{ $guardian->address }}</td>
 				<td>{{ $guardian->is_parent ? 'Ya' : 'Tidak' }}</td>
+				<td><a href="/guardians/edit">Edit </a><a href="/guardians/delete"> Delete</a></td>
 			</tr>
 			@endforeach
 		</tbody>
