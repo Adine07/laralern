@@ -12,6 +12,8 @@
 
 	<h1>List Article</h1>
 
+	<a href="/article/create">Tambah Article</a>
+
 	<table border="1" style="width: 80%; margin:auto">
 		<thead>
 			<tr>
