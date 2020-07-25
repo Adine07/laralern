@@ -22,41 +22,48 @@
 	<h1>Edit Guardian data</h1>
 
 
-	<table border="1">
-		<form action="/guardians/store" method="post">
+	<table>
+		<form action="/guardians/update/{{ $guardian->id }}" method="post">
 			@csrf
+			@method('PUT')
 			<tr>
 				<td>Name:</td>
-				<td colspan="2"><input type="text" name="name"></td>
+				<td><input type="text" name="name" value="{{ $guardian->name }}"></td>
 			</tr>
 			<tr>
 				<td>NIK:</td>
-				<td colspan="2"><input type="number" name="nik"></td>
+				<td><input type="number" name="nik" value="{{ $guardian->nik }}"></td>
 			</tr>
 			<tr>
 				<td>Gender:</td>
-				<td><input type="radio" value="l" name="gender"> Laki-laki</td>
-				<td><input type="radio" value="p" name="gender"> Perempuan</td>
+				<td>
+					<input type="radio" value="l" name="gender" {{ $guardian->gender == 'l' ? 'checked' : null }}> Laki-laki
+					<input type="radio" value="p" name="gender" {{ $guardian->gender == 'p' ? 'checked' : null }}> Perempuan
+				</td>
 			</tr>
 			<tr>
 				<td>Phone:</td>
-				<td><input type="number" name="phone"></td>
+				<td><input type="number" name="phone" value="{{ $guardian->phone }}"></td>
 			</tr>
 			<tr>
 				<td>Birth Date</td>
-				<td><input type="date" name="birth_date"></td>
+				<td><input type="date" name="birth_date" value="{{ $guardian->birth_date }}"></td>
 			</tr>
 			<tr>
 				<td>Address</td>
-				<td><textarea name="address" id="" cols="30" rows="10"></textarea></td>
+				<td><textarea name="address" id="" cols="30" rows="10">
+					{{ $guardian->address }}
+					</textarea></td>
 			</tr>
 			<tr>
 				<td>Biological Parent?</td>
-				<td><input type="radio" value="1" name="is_parent">Yes</td>
-				<td><input type="radio" value="0" name="is_parent">No</td>
+				<td>
+					<input type="radio" value="1" name="is_parent" {{ $guardian->is_parent ? 'checked' : null }}>Yes
+					<input type="radio" value="0" name="is_parent" {{ $guardian->is_parent ? null : 'checked' }}>No
+				</td>
 			</tr>
 			<tr>
-				<td colspan="3"><input type="submit" value="Input Data"></td>
+				<td style="text-align: center;"><input type="submit" value="Update Data"></td>
 			</tr>
 		</form>
 	</table>

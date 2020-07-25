@@ -39,8 +39,33 @@ class GuardianController extends Controller
         return redirect('/guardians');
     }
 
-    public function edit()
+    public function edit($id)
     {
-        return view('guardians.edit');
+        $guardian = Guardian::find($id);
+
+        return view('guardian.edit', compact('guardian'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $guard = Guardian::find($id);
+        $guard->name = $request->name;
+        $guard->nik = $request->nik;
+        $guard->phone = $request->phone;
+        $guard->gender = $request->gender;
+        $guard->address = $request->address;
+        $guard->birth_date = $request->birth_date;
+        $guard->is_parent = $request->is_parent;
+
+        $guard->save();
+
+        return redirect('/guardians');
+    }
+
+    public function delete($id)
+    {
+        Guardian::find($id)->delete();
+
+        return redirect('/guardians');
     }
 }

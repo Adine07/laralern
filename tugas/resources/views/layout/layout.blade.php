@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>AdminLTE 3 | Blank Page</title>
+	<title>@yield('title') | WebDes Admin</title>
 	<!-- Tell the browser to be responsive to screen width -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -12,6 +12,13 @@
 	<link rel="stylesheet" href="/admin/plugins/fontawesome-free/css/all.min.css">
 	<!-- Ionicons -->
 	<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+	<!-- DataTables -->
+	<link rel="stylesheet" href="/admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+	<link rel="stylesheet" href="/admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+	<!-- Theme style -->
+	<link rel="stylesheet" href="/admin/dist/css/adminlte.min.css">
+	<!-- summernote -->
+	<link rel="stylesheet" href="/admin/plugins/summernote/summernote-bs4.css">
 	<!-- overlayScrollbars -->
 	<link rel="stylesheet" href="/admin/dist/css/adminlte.min.css">
 	<!-- Google Font: Source Sans Pro -->
@@ -136,6 +143,14 @@
 					</div>
 				</li>
 				<li class="nav-item">
+					<a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+						<i class="fas fa-sign-out-alt"></i>{{ __('Logout') }}
+						<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+							@csrf
+						</form>
+					</a>
+				</li>
+				<li class="nav-item">
 					<a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
 						<i class="fas fa-th-large"></i>
 					</a>
@@ -160,7 +175,7 @@
 						<img src="/admin/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
 					</div>
 					<div class="info">
-						<a href="#" class="d-block">Adine Pamungkas</a>
+						<a href="#" class="d-block">{{ Auth::user()->name }}</a>
 					</div>
 				</div>
 
@@ -168,38 +183,38 @@
 				<nav class="mt-2">
 					<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 						<!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+							 with font-awesome or any other icon font library -->
+						<li class="nav-item">
+							<a href="/home" class="nav-link {{ $active == 'home' ? 'active' : ''}}">
+								<i class="nav-icon fas fa-tachometer-alt"></i>
+								<p>Dashboard</p>
+							</a>
+						</li>
 						<li class="nav-item has-treeview">
-							<a href="#" class="nav-link">
+							<a href="#" class="nav-link {{ $active == 'active' ? 'article' : ''}}">
 								<i class="nav-icon fas fa-tachometer-alt"></i>
 								<p>
-									Dashboard
+									Article
 									<i class="right fas fa-angle-left"></i>
 								</p>
 							</a>
 							<ul class="nav nav-treeview">
 								<li class="nav-item">
-									<a href="/admin/index.html" class="nav-link">
+									<a href="/article" class="nav-link {{ $active == 'myarticle' ? 'active' : ''}}">
 										<i class="far fa-circle nav-icon"></i>
-										<p>Dashboard v1</p>
+										<p>My Articles</p>
 									</a>
 								</li>
 								<li class="nav-item">
-									<a href="/admin/index2.html" class="nav-link">
+									<a href="/article/create" class="nav-link {{ $active == 'createarticle' ? 'active' : ''}}">
 										<i class="far fa-circle nav-icon"></i>
-										<p>Dashboard v2</p>
-									</a>
-								</li>
-								<li class="nav-item">
-									<a href="/admin/index3.html" class="nav-link">
-										<i class="far fa-circle nav-icon"></i>
-										<p>Dashboard v3</p>
+										<p>Create Article</p>
 									</a>
 								</li>
 							</ul>
 						</li>
 						<li class="nav-item">
-							<a href="../widgets.html" class="nav-link">
+							<a href="../widgets.html" class="nav-link {{ $active == 'wiget' ? 'active' : ''}}">
 								<i class="nav-icon fas fa-th"></i>
 								<p>
 									Widgets
@@ -207,12 +222,12 @@
 								</p>
 							</a>
 						</li>
-						<li class="nav-header">EXAMPLES</li>
+						<li class="nav-header">USER</li>
 						<li class="nav-item">
-							<a href="../calendar.html" class="nav-link">
+							<a href="/user" class="nav-link {{ $active == 'user' ? 'active' : ''}}">
 								<i class="nav-icon far fa-calendar-alt"></i>
 								<p>
-									Calendar
+									User
 									<span class="badge badge-info right">2</span>
 								</p>
 							</a>
@@ -226,49 +241,28 @@
 
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
-			<!-- Content Header (Page header) -->
+
 			<section class="content-header">
 				<div class="container-fluid">
 					<div class="row mb-2">
 						<div class="col-sm-6">
-							<h1>Blank Page</h1>
+							<h1>@yield('pageTitle')</h1>
 						</div>
 						<div class="col-sm-6">
 							<ol class="breadcrumb float-sm-right">
-								<li class="breadcrumb-item"><a href="#">Home</a></li>
-								<li class="breadcrumb-item active">Blank Page</li>
+								<!-- <li class="breadcrumb-item"><a href="#">Home</a></li>
+								<li class="breadcrumb-item active">Blank Page</li> -->
+								@yield('breadcrumb')
 							</ol>
 						</div>
 					</div>
-				</div><!-- /.container-fluid -->
-			</section>
-
-			<!-- Main content -->
-			<section class="content">
-
-				<!-- Default box -->
-				<div class="card">
-					<div class="card-header">
-						<h3 class="card-title">Title</h3>
-
-						<div class="card-tools">
-							<button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-								<i class="fas fa-minus"></i></button>
-							<button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
-								<i class="fas fa-times"></i></button>
-						</div>
-					</div>
-					<div class="card-body">
-						Start creating your amazing application!
-					</div>
-					<!-- /.card-body -->
-					<div class="card-footer">
-						Footer
-					</div>
-					<!-- /.card-footer-->
 				</div>
-				<!-- /.card -->
-
+			</section>
+			<!-- Content Start -->
+			<section class="content">
+				<div class="container-fluid">
+					@yield('content')
+				</div>
 			</section>
 			<!-- /.content -->
 		</div>
@@ -276,9 +270,9 @@
 
 		<footer class="main-footer">
 			<div class="float-right d-none d-sm-block">
-				<b>Version</b> 3.0.5
+				<b>WebDes-Version</b> 0.0.1
 			</div>
-			<strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights
+			<strong>Copyright &copy; 2020 <a href="#">WebDes</a>.</strong> All rights
 			reserved.
 		</footer>
 
@@ -294,10 +288,19 @@
 	<script src="/admin/plugins/jquery/jquery.min.js"></script>
 	<!-- Bootstrap 4 -->
 	<script src="/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<!-- DataTables -->
+	<script src="/admin/plugins/datatables/jquery.dataTables.min.js"></script>
+	<script src="/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+	<script src="/admin/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+	<script src="/admin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 	<!-- AdminLTE App -->
 	<script src="/admin/dist/js/adminlte.min.js"></script>
 	<!-- AdminLTE for demo purposes -->
 	<script src="/admin/dist/js/demo.js"></script>
+	<!-- Summernote -->
+	<script src="/admin/plugins/summernote/summernote-bs4.min.js"></script>
+	<!-- MyScript -->
+	<script src="/js/script.js"></script>
 </body>
 
 </html>

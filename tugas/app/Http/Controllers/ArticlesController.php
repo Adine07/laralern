@@ -7,6 +7,10 @@ use App\Model\Article;
 
 class ArticlesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +20,7 @@ class ArticlesController extends Controller
     {
         $articles = Article::all();
 
-        return view('article.index', compact('articles'));
+        return view('dashmin.article.index', compact('articles'));
     }
 
     /**
@@ -26,7 +30,7 @@ class ArticlesController extends Controller
      */
     public function create()
     {
-        return view('article.create');
+        return view('dashmin.article.create');
     }
 
     /**

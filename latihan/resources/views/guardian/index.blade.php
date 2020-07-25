@@ -12,7 +12,7 @@
 
 	<h1>Data Wali</h1>
 
-	<a href="/guardians/create">Tambah Data</a>
+	<a href="/guardians/create">Tambah Data</a><br><br>
 
 	<table border="1" style="width: 100%;">
 		<thead>
@@ -38,7 +38,14 @@
 				<td>{{ $guardian->birth_date }}</td>
 				<td>{{ $guardian->address }}</td>
 				<td>{{ $guardian->is_parent ? 'Ya' : 'Tidak' }}</td>
-				<td><a href="/guardians/edit">Edit </a><a href="/guardians/delete"> Delete</a></td>
+				<td>
+					<a href="/guardians/edit/{{$guardian->id}}">Edit </a>
+					<form action="/guardians/delete/{{$guardian->id}}" method="post">
+						@csrf
+						@method('DELETE')
+						<button>Hapus</button>
+					</form>
+				</td>
 			</tr>
 			@endforeach
 		</tbody>
