@@ -1,66 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layout.app')
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<style>
-		h1 {
-			text-align: center;
-		}
+@section('title', 'Guardians')
 
-		table {
-			width: 80%;
-			margin: auto;
-		}
-	</style>
-	<title>Create | School</title>
-</head>
+@section('content')
 
-<body>
-
-	<h1>Input Guardian data</h1>
+<h1>Input Guardian data</h1>
 
 
-	<table border="1">
-		<form action="/guardians/store" method="post">
-			@csrf
-			<tr>
-				<td>Name:</td>
-				<td colspan="2"><input type="text" name="name"></td>
-			</tr>
-			<tr>
-				<td>NIK:</td>
-				<td colspan="2"><input type="number" name="nik"></td>
-			</tr>
-			<tr>
-				<td>Gender:</td>
-				<td><input type="radio" value="l" name="gender"> Laki-laki</td>
-				<td><input type="radio" value="p" name="gender"> Perempuan</td>
-			</tr>
-			<tr>
-				<td>Phone:</td>
-				<td><input type="number" name="phone"></td>
-			</tr>
-			<tr>
-				<td>Birth Date</td>
-				<td><input type="date" name="birth_date"></td>
-			</tr>
-			<tr>
-				<td>Address</td>
-				<td><textarea name="address" id="" cols="30" rows="10"></textarea></td>
-			</tr>
-			<tr>
-				<td>Biological Parent?</td>
-				<td><input type="radio" value="1" name="is_parent">Yes</td>
-				<td><input type="radio" value="0" name="is_parent">No</td>
-			</tr>
-			<tr>
-				<td colspan="3"><input type="submit" value="Input Data"></td>
-			</tr>
-		</form>
-	</table>
-
-</body>
-
-</html>
+<table border="1">
+	<form action="/guardians/store" method="post">
+		@csrf
+		<tr>
+			<td>Name:</td>
+			<td colspan="2"><input type="text" name="name"></td>
+		</tr>
+		<tr>
+			<td>NIK:</td>
+			<td colspan="2"><input type="number" name="nik"></td>
+		</tr>
+		<tr>
+			<td>Gender:</td>
+			<td><input type="radio" value="l" name="gender"> Laki-laki <input type="radio" value="p" name="gender"> Perempuan</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Phone:</td>
+			<td><input type="number" name="phone"></td>
+		</tr>
+		<tr>
+			<td>Birth Date</td>
+			<td><input type="date" name="birth_date"></td>
+		</tr>
+		<tr>
+			<td>Address</td>
+			<td><textarea name="address" id="" cols="30" rows="10"></textarea></td>
+		</tr>
+		<tr>
+			<td>Biological Parent?</td>
+			<td><input type="radio" value="1" name="is_parent">Yes</td>
+			<td><input type="radio" value="0" name="is_parent">No</td>
+		</tr>
+		<tr>
+			<td colspan="3"><input type="submit" value="Input Data"></td>
+		</tr>
+	</form>
+</table>
+@endsection

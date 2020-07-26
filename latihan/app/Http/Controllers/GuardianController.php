@@ -8,9 +8,15 @@ use Ramsey\Uuid\Guid\Guid;
 
 class GuardianController extends Controller
 {
+
+    function __construct()
+    {
+        $this->model = new Guardian();
+    }
+
     public function index()
     {
-        $guardians = Guardian::all();
+        $guardians = $this->model->all();
 
         return view('guardian.index', compact('guardians'));
     }
@@ -22,33 +28,33 @@ class GuardianController extends Controller
 
     public function store(Request $request)
     {
-        // $guard = new Guardian();
+        $guard = $this->model;
 
-        // $guard->name = $request->name;
-        // $guard->nik = $request->nik;
-        // $guard->gender = $request->gender;
-        // $guard->phone = $request->phone;
-        // $guard->birth_date = $request->birth_date;
-        // $guard->address = $request->address;
-        // $guard->is_parent = $request->is_parent;
+        $guard->name = $request->name;
+        $guard->nik = $request->nik;
+        $guard->gender = $request->gender;
+        $guard->phone = $request->phone;
+        $guard->birth_date = $request->birth_date;
+        $guard->address = $request->address;
+        $guard->is_parent = $request->is_parent;
 
-        // $guard->save();
+        $guard->save();
 
-        Guardian::create($request->all());
+        // Guardian::create($request->all());
 
         return redirect('/guardians');
     }
 
     public function edit($id)
     {
-        $guardian = Guardian::find($id);
+        $guardian = $this->model->find($id);
 
         return view('guardian.edit', compact('guardian'));
     }
 
     public function update(Request $request, $id)
     {
-        $guard = Guardian::find($id);
+        $guard = $this->model->find($id);
         $guard->name = $request->name;
         $guard->nik = $request->nik;
         $guard->phone = $request->phone;
@@ -64,7 +70,7 @@ class GuardianController extends Controller
 
     public function delete($id)
     {
-        Guardian::find($id)->delete();
+        $this->model->find($id)->delete();
 
         return redirect('/guardians');
     }
